@@ -5,6 +5,6 @@ const authMiddleware = require('../middleware/auth.middleware');
 const errorMiddleware = require('../middleware/error.middleware');
 
 router.use(errorMiddleware)
-router.get('/chat', authMiddleware, chatController.handleChat);
+router.post('/chat', authMiddleware, chatController.handleChat);
 
 module.exports = router;

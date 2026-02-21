@@ -16,7 +16,17 @@ module.exports = {
                     }
                 ]
             });
-            return response.choices[0].message.content;
+            const inputTokens = response.usage?.promptTokens || 0;
+            const outputTokens = response.usage?.completion_tokens||0;
+            const totalTokens = response.usage?.total_tokens||0;
+            return {
+                content: response.choices[0].message.content,
+                usage:{
+                    inputTokens,
+                    outputTokens,
+                    totalTokens
+                }
+            }
         } catch (error) {
             throw new Error(`Gemini API error: ${error.message}`);
         }
